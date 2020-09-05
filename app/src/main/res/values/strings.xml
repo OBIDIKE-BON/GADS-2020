@@ -1,0 +1,11 @@
+<resources>
+    <string name="learning_tab_title">Learning Leaders</string>
+    <string name="skill_iq_tab_title">Skill IQ Leaders</string>
+    <string name="prifile_tab_title">Profile</string>
+    <string name="app_name">GADS 2020</string>
+    <string name="main_Activity_label">LEADERBOARD</string>
+    <string name="title_activity_submit">SubmitActivity</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="welcom_img_description">Welcome to Google Associate Developers Scholarship (GADS) 2020</string>
+    <string name="btn_submit_text">Submit</string>
+</resources>
