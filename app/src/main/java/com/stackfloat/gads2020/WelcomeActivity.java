@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.widget.Toolbar;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -27,6 +28,6 @@ public class WelcomeActivity extends AppCompatActivity {
             public void run() {
                 startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
             }
-        }, 5000);
+        }, 3000);
     }
 }

@@ -1,5 +1,6 @@
 package com.stackfloat.gads2020;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -11,6 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.telecom.Call;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,5 +37,10 @@ public class MainActivity extends AppCompatActivity {
                 tab.setText(sectionsPagerAdapter.getPageTitle(position));
             }
         }).attach();
+
+    }
+
+    public void startSubmit(View view) {
+        startActivity(new Intent(this, SubmitActivity.class));
     }
 }
