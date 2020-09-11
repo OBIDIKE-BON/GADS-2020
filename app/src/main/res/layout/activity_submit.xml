@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gads_2020_bg2"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".SubmitActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -137,6 +137,7 @@
             android:layout_marginTop="@dimen/dimen_16dp"
             android:background="@drawable/btn_submit_bg"
             android:text="@string/submit"
+            android:onClick="submitProject"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"

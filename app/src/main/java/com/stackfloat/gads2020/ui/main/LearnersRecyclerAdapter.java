@@ -1,10 +1,10 @@
 package com.stackfloat.gads2020.ui.main;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -12,17 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.stackfloat.gads2020.R;
+import com.stackfloat.gads2020.services.LearnerLeader;
+import com.stackfloat.gads2020.services.LoadImageWithPicasso;
 
+import java.util.List;
 
-public class QuizzesRecyclerAdapter
-        extends RecyclerView.Adapter<QuizzesRecyclerAdapter.ViewHolder>  {
+public class LearnersRecyclerAdapter
+        extends RecyclerView.Adapter<LearnersRecyclerAdapter.ViewHolder> {
 
     private Context mContext;
-private String[] mQuizzesNames;
+    private List<LearnerLeader> leaders;
 
-    public QuizzesRecyclerAdapter(Context context, String[] quizzesNames) {
+    public LearnersRecyclerAdapter(Context context) {
         mContext = context;
-        this.mQuizzesNames = quizzesNames;
     }
 
     /**
@@ -48,7 +50,7 @@ private String[] mQuizzesNames;
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new ViewHolder(LayoutInflater.from(mContext)
+        return new ViewHolder(LayoutInflater.from(mContext)
                 .inflate(R.layout.lessons_recycler_item, parent, false));
     }
 
@@ -74,11 +76,8 @@ private String[] mQuizzesNames;
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if (mQuizzesNames.length!=0){
-            int i = position + 1;
-            holder.mQuizzesNumber.setText(String.valueOf(i));
-            holder.mQuizzesTitle.setText(mQuizzesNames[position]);
-            holder.mQuizzesPosition = position;
+        if (leaders.size() != 0) {
+            holder.setLeaders(position);
         }
     }
 
@@ -89,29 +88,50 @@ private String[] mQuizzesNames;
      */
     @Override
     public int getItemCount() {
-        return mQuizzesNames.length;
+        if (leaders != null) {
+            return leaders.size();
+        } else {
+            return 0;
+        }
     }
 
-    class  ViewHolder extends RecyclerView.ViewHolder{
+    public void setLeaders(List<LearnerLeader> leaders) {
+        if (leaders!=null) {
+            this.leaders = leaders;
+            notifyDataSetChanged();
+        }
+    }
 
-        private int mQuizzesPosition;
-        private final TextView mQuizzesNumber;
-        private final TextView mQuizzesTitle;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView mLearnerName;
+        private final TextView mLearnerHours;
+        private final ImageView mLearnerBadge;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            mQuizzesNumber = itemView.findViewById(R.id.item_index);
-            mQuizzesTitle = itemView.findViewById(R.id.item_title);
+            mLearnerName = itemView.findViewById(R.id.item_name);
+            mLearnerHours = itemView.findViewById(R.id.item_score);
+            mLearnerBadge = itemView.findViewById(R.id.img_badge);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Intent intent = new Intent(mContext, QuestionsActivity.class);
-//                    intent.putExtra(QuestionsActivity.QUESTIONS_INDEX, mQuizzesPosition);
+//                    Intent intent = new Intent(mContext, LessonsActivity.class);
+//                    intent.putExtra(LessonsActivity.LESSON_POSITION,mLessonPosition);
 //                    mContext.startActivity(intent);
                 }
             });
+        }
+
+        public void setLeaders(int position) {
+            LearnerLeader leader = leaders.get(position);
+            mLearnerName.setText(leader.getName());
+            String text = leader.getHours() +" "+
+                    mContext.getString(R.string.learning_hours_text) +
+                    leader.getCountry();
+            mLearnerHours.setText(text);
+            LoadImageWithPicasso.loadImage(mLearnerBadge, leader.getBadgeUrl(), R.drawable.ic_badge);
         }
     }
 }

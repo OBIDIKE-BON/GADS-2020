@@ -19,8 +19,9 @@ public class SectionsPagerAdapter extends FragmentStateAdapter {
 
 
     private static final int[] TAB_TITLES = new int[]{
-            R.string.learning_tab_title,
-            R.string.skill_iq_tab_title};
+
+            R.string.skill_iq_tab_title,
+            R.string.learning_tab_title};
     private Context mContext;
 
     /**
